@@ -1,0 +1,28 @@
+group 'com.github.serezhka'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '2.0.1.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa', version: '2.0.1.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-cache', version: '2.0.1.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator', version: '2.0.1.RELEASE'
+    compile group: 'io.netty', name: 'netty-all', version: '4.1.22.Final'
+    compile group: 'de.neuland-bfi', name: 'spring-jade4j', version: '1.2.7'
+    compile group: 'log4j', name: 'log4j', version: '1.2.17'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.197'
+    compile("org.webjars:webjars-locator-core:0.35")
+    compile("org.webjars:bootstrap:3.3.7")
+    compile("org.webjars:jquery:3.1.0")
+
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

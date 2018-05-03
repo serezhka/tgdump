@@ -1,0 +1,48 @@
+include /pug-bootstrap/components/icons
+include /pug-bootstrap/components/alerts
+include /pug-bootstrap/components/tooltips
+include /pug-bootstrap/components/accordion
+include /pug-bootstrap/components/carousel
+include /pug-bootstrap/components/tables
+include /pug-bootstrap/components/navbar
+include /pug-bootstrap/components/toggle
+include /pug-bootstrap/components/navs
+include /pug-bootstrap/components/labels
+include /pug-bootstrap/components/panels
+include /pug-bootstrap/components/tabs
+include /pug-bootstrap/components/dropdowns
+include /pug-bootstrap/components/forms
+include /pug-bootstrap/components/modal
+include /pug-bootstrap/components/list-groups
+include /pug-bootstrap/components/progress-bars
+include /pug-bootstrap/components/buttons
+include /pug-bootstrap/components/images
+include /pug-bootstrap/components/bootswatch
+
+doctype html
+
+html(lang="en")
+
+head
+    block head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+
+        title TGDump
+
+        block styles
+            link(rel="stylesheet", href="/webjars/bootstrap/css/bootstrap.min.css", type="text/css")
+            link(rel="stylesheet", href="/tgdump.css", type="text/css")
+
+        block scripts
+            script(src="/webjars/jquery/jquery.min.js")
+            script(src="/webjars/bootstrap/js/bootstrap.min.js")
+            //script(src="https://rawgit.com/joewalnes/reconnecting-websocket/master/reconnecting-websocket.min.js")
+            script(src="/reconnecting-websocket.min.js")
+            script(src="/tgdump.js")
+body
+    include navbar
+
+    block body
+        p TGDump
