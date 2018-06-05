@@ -1,0 +1,28 @@
+doctype html
+
+html(lang="en")
+
+head
+    block head
+        meta(charset="UTF-8")
+        meta(http-equiv="X-UA-Compatible", content="IE=edge")
+        meta(name="viewport", content="width=device-width, initial-scale=1")
+
+        title TGDump
+
+        block styles
+            link(rel="stylesheet", href="/webjars/bootstrap/css/bootstrap.min.css", type="text/css")
+            link(rel="stylesheet", href="/webjars/font-awesome/5.0.10/web-fonts-with-css/css/fontawesome-all.min.css", type="text/css")
+            link(rel="stylesheet", href="/tgdump.css", type="text/css")
+
+        block scripts
+            script(src="/webjars/jquery/jquery.min.js")
+            script(src="/webjars/bootstrap/js/bootstrap.min.js")
+            //script(src="https://rawgit.com/joewalnes/reconnecting-websocket/master/reconnecting-websocket.min.js")
+            script(src="/reconnecting-websocket.min.js")
+            script(src="/tgdump.js")
+body
+    include navbar
+
+    block body
+        p TGDump

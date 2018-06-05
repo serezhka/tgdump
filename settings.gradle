@@ -1,1 +1,5 @@
-rootProject.name = 'tgdump'
+rootProject.name = "tgdump"
+
+include "Telegram:API"
+include "Telegram:Impl"
+include "Web"

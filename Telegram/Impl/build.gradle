@@ -1,0 +1,6 @@
+dependencies {
+    compile "org.springframework:spring-context:$springVersion"
+    compile "log4j:log4j:1.2.17"
+
+    compile project(":Telegram:API")
+}

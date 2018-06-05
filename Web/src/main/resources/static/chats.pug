@@ -1,0 +1,11 @@
+extends tgdump
+
+append scripts
+    script(src="/webjars/infinite-scroll/3.0.4/dist/infinite-scroll.pkgd.min.js")
+    script(src="/chats.js")
+
+block body
+
+    of#chats
+        each chat in chats
+            li.chatItem #{chat.lastMessage.content.text.text}
