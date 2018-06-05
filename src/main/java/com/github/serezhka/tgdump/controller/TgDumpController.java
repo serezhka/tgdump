@@ -1,6 +1,7 @@
 package com.github.serezhka.tgdump.controller;
 
 import com.github.serezhka.tgdump.service.MessageService;
+import com.github.serezhka.tgdump.telegram.TdClient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -15,15 +16,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/")
 public class TgDumpController {
 
+    private final TdClient tdClient;
     private final MessageService messageService;
 
     @Autowired
-    public TgDumpController(MessageService messageService) {
+    public TgDumpController(TdClient tdClient,
+                            MessageService messageService) {
+        this.tdClient = tdClient;
         this.messageService = messageService;
     }
 
     @RequestMapping
-    public String index() {
+    public String index(Model model) {
+        //model.addAttribute("tgConnectionState", tdClient.get)
         return "tgdump";
     }
 

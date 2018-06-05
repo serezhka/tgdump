@@ -22,6 +22,10 @@ public class TdClientImpl implements TdClient {
 
     private static final Logger LOGGER = Logger.getLogger(TdClientImpl.class);
 
+    static {
+        System.loadLibrary("tdjni");
+    }
+
     private final Client.ResultHandler defaultResultHandler;
     private final Client.ExceptionHandler defaultExceptionHandler;
     private final TdApi.TdlibParameters tdlibParameters;

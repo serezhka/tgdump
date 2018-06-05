@@ -1,6 +1,14 @@
 body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+}
+
+#ws_connection > i, #tg_connection > i {
+    color: red;
+    margin-left: 5px;
+}
+
+.navbar-text, .tg_auth {
+    padding-left: .5rem;
+    padding-right: .5rem;
 }
 
 .tg-auth {

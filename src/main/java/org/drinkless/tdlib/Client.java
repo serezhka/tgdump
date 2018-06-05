@@ -130,7 +130,7 @@ public final class Client implements Runnable {
      *
      * @param defaultExceptionHandler Default exception handler. If null Exceptions are ignored.
      */
-    public void setDefaultExceptionHandler(ExceptionHandler defaultExceptionHandler) {
+    public void setDefaultExceptionHandler(Client.ExceptionHandler defaultExceptionHandler) {
         this.defaultExceptionHandler = defaultExceptionHandler;
     }
 

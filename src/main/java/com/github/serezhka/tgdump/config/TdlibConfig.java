@@ -13,8 +13,8 @@ public class TdlibConfig {
     @Bean
     public TdApi.TdlibParameters tdlibParameters() {
         TdApi.TdlibParameters parameters = new TdApi.TdlibParameters();
-        parameters.apiId = 94575;
-        parameters.apiHash = "a3406de8d171bb422bb6ddf3bbd800e2";
+        parameters.apiId = 86663;
+        parameters.apiHash = "1660030261a6894332cb0dd2ba2236a4";
         parameters.systemLanguageCode = "en";
         parameters.deviceModel = "Desktop";
         parameters.systemVersion = "Unknown";
@@ -27,10 +27,8 @@ public class TdlibConfig {
 
     @Bean
     public TdApi.Proxy tdlibProxy() {
-        //return new TdApi.ProxySocks5("p2.telegram-s.org", 433, null, null);
-        //return new TdApi.ProxySocks5("185.211.245.136", 1080, "24181345", "rJ5jhFGl");
-        //return new TdApi.ProxySocks5("4.tgsocks.cf", 1080, null, null);
+        return new TdApi.ProxySocks5("127.0.0.1", 9150, null, null);
         //return new TdApi.ProxySocks5("proxy.t-systems.ru", 3128, null, null);
-        return new TdApi.ProxyEmpty();
+        //return new TdApi.ProxyEmpty();
     }
 }

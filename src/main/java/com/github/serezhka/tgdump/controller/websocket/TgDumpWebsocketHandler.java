@@ -97,6 +97,9 @@ public class TgDumpWebsocketHandler extends SimpleChannelInboundHandler<TextWebS
         JsonNode message = objectMapper.readTree(msg.content().retain().toString(UTF_8));
         LOGGER.info("Received message: " + message);
         switch (message.get("command").asText()) {
+            case "getConnectionState":
+                send(tdClient.getConnectionState());
+                break;
             case "getAuthState":
                 send(tdClient.getAuthorizationState());
                 break;

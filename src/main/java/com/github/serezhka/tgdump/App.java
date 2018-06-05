@@ -11,10 +11,6 @@ import org.springframework.cache.annotation.EnableCaching;
 @SpringBootApplication
 public class App {
 
-    static {
-        System.loadLibrary("tdjni");
-    }
-
     public static void main(String[] args) {
         SpringApplication.run(App.class, args);
     }

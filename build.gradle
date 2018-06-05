@@ -21,8 +21,10 @@ dependencies {
     compile group: 'log4j', name: 'log4j', version: '1.2.17'
     compile group: 'com.h2database', name: 'h2', version: '1.4.197'
     compile("org.webjars:webjars-locator-core:0.35")
-    compile("org.webjars:bootstrap:3.3.7")
-    compile("org.webjars:jquery:3.1.0")
+    compile("org.webjars:jquery:3.3.1")
+    compile("org.webjars:bootstrap:4.1.0")
+    compile("org.webjars:font-awesome:5.0.10")
+
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }

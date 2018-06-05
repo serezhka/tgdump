@@ -22,17 +22,20 @@ public class EntityConverter {
         }
         lastMessage.setDate(chat.lastMessage.date);
 
-        File chatPhoto = new File();
-        Optional.ofNullable(chat.photo).map(photo -> photo.small).ifPresent(small -> {
-            Optional.ofNullable(small.local).map(local -> local.path).ifPresent(chatPhoto::setLocalPath);
-            Optional.ofNullable(small.remote).map(local -> local.id).ifPresent(chatPhoto::setRemoteId);
-        });
-
         Chat entity = new Chat();
         entity.setChatId(chat.id);
         entity.setTitle(chat.title);
-        entity.setChatPhoto(chatPhoto);
         entity.setLastMessage(lastMessage);
+
+        Optional.ofNullable(chat.photo).map(photo -> photo.small).map(EntityConverter::fileToEntity).ifPresent(entity::setChatPhoto);
+
+        return entity;
+    }
+
+    public static File fileToEntity(TdApi.File file) {
+        File entity = new File();
+        Optional.ofNullable(file.local).map(local -> local.path).ifPresent(entity::setLocalPath);
+        Optional.ofNullable(file.remote).map(local -> local.id).ifPresent(entity::setRemoteId);
         return entity;
     }
 }

@@ -6,31 +6,25 @@ ws = new ReconnectingWebSocket("ws://" + TGDUMP_HOST + ":" + TGDUMP_PORT + TGDUM
 ws.debug = true;
 ws.maxReconnectInterval = 5000;
 
-
 ws.onopen = function () {
     console.log("Websocket connection established with " + TGDUMP_HOST + " on port " + TGDUMP_PORT);
-    $("#ws_indicator").css("color", "green");
-    $("#tg_auth").show();
-    $("#tg_auth_state").text("Initializing");
+    onWebsocketConnected();
 };
 
 ws.onmessage = function (evt) {
     var update = JSON.parse(evt.data);
     if (update.AuthorizationStateWaitPhoneNumber) {
-        $(".tg_auth").hide();
-        $("#tg_auth_phone").show();
-        $("#tg_auth_state").text("Waiting phone number");
         console.log("Waiting phone number");
+        onAuthorizationStateWaitPhoneNumber();
     } else if (update.AuthorizationStateWaitCode) {
-        $(".tg_auth").hide();
-        $("#tg_auth_code").show();
-        $("#tg_auth_state").text("Waiting code");
         console.log("Waiting code");
+        onAuthorizationStateWaitCode();
     } else if (update.AuthorizationStateReady) {
-        $(".tg_auth").hide();
-        $("#tg_auth_logout").show();
-        $("#tg_auth_state").text("Logged-in");
         console.log("Authenticated");
+        onAuthorizationStateReady();
+    } else if (update.ConnectionStateReady) {
+        console.log("Connected");
+        onTelegramConnected();
     } else {
         console.log(evt.data);
     }
@@ -42,9 +36,14 @@ ws.onerror = function (error) {
 
 ws.onclose = function (event) {
     console.log("Websocket connection closed with code: " + event.code);
-    $("#ws_indicator").css("color", "red");
-    $("#tg_auth").hide();
+    onWebsocketDisconnected()
 };
+
+function getConnectionState() {
+    sendCommand({
+        command: "getConnectionState"
+    });
+}
 
 function getAuthState() {
     sendCommand({
@@ -79,6 +78,52 @@ function logout() {
     });
 }
 
+function onWebsocketConnected() {
+    $("#ws_connection i").each(greenIndicator);
+    $("#tg_auth").show();
+    $("#tg_auth_state").text("Initializing");
+}
+
+function onWebsocketDisconnected() {
+    $("#ws_connection i").each(redIndicator);
+    $("#tg_connection i").each(redIndicator);
+    $("#tg_auth").hide();
+}
+
+function onAuthorizationStateWaitPhoneNumber() {
+    $(".tg_auth").hide();
+    $("#tg_auth_phone").show();
+    $("#tg_auth_state").text("Waiting phone number");
+}
+
+function onAuthorizationStateWaitCode() {
+    $(".tg_auth").hide();
+    $("#tg_auth_code").show();
+    $("#tg_auth_state").text("Waiting code");
+}
+
+function onAuthorizationStateReady() {
+    $(".tg_auth").hide();
+    $("#tg_auth_logout").show();
+    $("#tg_auth_state").text("Logged-in");
+}
+
+function onTelegramConnected() {
+    $("#tg_connection i").each(greenIndicator);
+}
+
+function greenIndicator() {
+    $(this).removeClass("fa-unlink");
+    $(this).addClass("fa-link");
+    $(this).css("color", "green");
+}
+
+function redIndicator() {
+    $(this).removeClass("fa-link");
+    $(this).addClass("fa-unlink");
+    $(this).css("color", "red");
+}
+
 /**
  * @see TdClient
  * @param command
@@ -90,7 +135,8 @@ function sendCommand(command) {
 }
 
 $(function () {
-    setInterval(getAuthState, 5000);
+    setInterval(getConnectionState, 7000);
+    setInterval(getAuthState, 7000);
 
     $("#tg_auth_phone form").on("submit", function (event) {
         $(".tg-auth").hide();
@@ -99,13 +145,13 @@ $(function () {
     });
 
     $("#tg_auth_code form").on("submit", function (event) {
-        $("#tg-auth").hide();
+        $(".tg-auth").hide();
         checkAuthenticationCode($(this).find("input[name=code]").val());
         event.preventDefault();
     });
 
     $("#tg_auth_logout form").on("submit", function (event) {
-        $("#tg-auth").hide();
+        $(".tg-auth").hide();
         logout();
         event.preventDefault();
     });
